@@ -1,13 +1,16 @@
-import mysql.connector as connector
+import psycopg2 as connector
+import psycopg2.extras
 
 
 class Database:
     def __init__(self):
         self.con = connector.connect(
-            host='localhost', port='3306', user='root', password='1234', database='testdb2')
+            host='ec2-52-204-157-26.compute-1.amazonaws.com', port='5432', user='xhpgiuarbzkoup', password='0e3149f1ee98a2ecb45a948ada55c1af027bf6044d3e724c4634aecb4bf611f5', database='dberlnocf4u3fk')
         self.con.autocommit = True
-        self.cur = self.con.cursor(dictionary=True)
-        tables = ['''create table if not exists user(
+        self.cur = self.con.cursor(cursor_factory= psycopg2.extras.DictCursor)
+        
+        # user is a reserved keyword in postgresql
+        tables = ['''create table if not exists user1 (
                        username varchar(20),
                        password varchar(20),
                        fullname varchar(30),
@@ -32,19 +35,19 @@ class Database:
                         primary key (username),
                         constraint fk_student_details_to_user
                             foreign key (username)
-                            references user (username)
+                            references user1 (username)
                             on delete cascade
                         )                  
                     ''',
 
                   '''create table if not exists registered_students (
-                        id int auto_increment,
+                        id serial,
                         username varchar(20) not null,
                         registration_no varchar(20),
                         primary key (id),
                         constraint fk_registered_to_users
                             foreign key (username)
-                            references testdb2.user (username)
+                            references user1 (username)
                             on delete cascade
                         )'''
                   ]
@@ -53,13 +56,13 @@ class Database:
         print('Created tables')
 
     def create_user(self, username, password, fullname):
-        query = "insert into user values ('{}', '{}', '{}')".format(
+        query = "insert into user1 values ('{}', '{}', '{}')".format(
             username, password, fullname)
         self.cur.execute(query)
         print('Row Inserted successfully')
 
     def isUnique(self, username):
-        query = "select * from user where username = '{}'".format(username)
+        query = "select * from user1 where username = '{}'".format(username)
         self.cur.execute(query)
         result = self.cur.fetchall()
         if len(result) == 0:
@@ -67,7 +70,7 @@ class Database:
         return False
 
     def userExists(self, username, password):
-        query = "select * from user where username = '{}' and password='{}'".format(
+        query = "select * from user1 where username = '{}' and password='{}'".format(
             username, password)
         self.cur.execute(query)
         result = self.cur.fetchall()
@@ -76,7 +79,7 @@ class Database:
         return False
 
     def getFullName(self, username):
-        query = "select fullname from user where username = '{}'".format(
+        query = "select fullname from user1 where username = '{}'".format(
             username)
         self.cur.execute(query)
         result = self.cur.fetchone()
@@ -150,7 +153,7 @@ class Database:
         return self.cur.fetchone()['registration_no']
 
 
-# db1 = Database()
+db1 = Database()
 # print(db1.isRegSubmitted('sjha'))
 
 # '{0:04}'.format(id)
