@@ -1,0 +1,189 @@
+
+{% extends 'base.html' %} 
+
+{% block title %} Registration Form {% endblock title %}
+
+{% block body %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark nav2">
+    <div class="container-fluid">
+      <a class="btn btn-secondary" href="{{ url_for('dashboard') }}">Go to Dashboard</a>
+      <h2 class="mx-auto">Registration Form</h2>
+
+      <a href="{{ url_for('logout') }}" class="btn btn-danger mx-3">Logout</a>
+      </div>
+    </div>
+</nav>
+
+  <form action="" method="POST" class="my-4">
+<div class="container-fluid">
+        <h4>Personal Details:</h4>
+        <hr>
+        <div class="container col-md-6 m-auto">
+
+        <div class="mb-3 ">
+            <label for="fullname" class="form-label">Candidate's Full Name</label>
+            <input type="text" class="form-control" id="fullname" name="fullname" value="{{session.fullname}}" readonly >
+        </div>
+        
+        <div class="mb-3 ">
+            <label for="gender" class="form-label">Gender: </label>
+            <div class="form-check form-check-inline mx-2">
+                <input class="form-check-input" type="radio" name="gender" id="gender1" value="male"
+                {% if values.gender == 'male' %}
+                checked
+                {% endif %}
+                >
+                <label class="form-check-label" for="gender1">Male</label>
+            </div>
+            <div class="form-check form-check-inline mx-2">
+                <input class="form-check-input" type="radio" name="gender" id="gender2" value="female"
+                {% if values.gender == 'female' %}
+                checked
+                {% endif %}
+                >
+                <label class="form-check-label" for="gender2">Female</label>
+            </div>
+            <div class="form-check form-check-inline mx-2">
+                <input class="form-check-input" type="radio" name="gender" id="gender3" value="other"
+                {% if values.gender == 'other' %}
+                checked
+                {% endif %}
+                >
+                <label class="form-check-label" for="gender3">Other</label>
+            </div>
+        </div>
+        
+        <div class="mb-3 ">
+            <label for="dob" class="form-label">DOB</label>
+            <input type="date" class="form-control" id="dob" name="dob" 
+            {% if values.dob %}
+            value="{{values.dob}}"
+            {% endif %}>
+        </div>
+
+        <div class="mb-3 ">
+            <label for="guardianname" class="form-label">Guardian's Full Name</label>
+            <input type="text" class="form-control" id="guardianname" name="guardianname" {% if values.guardian_name %}
+            value="{{values.guardian_name}}"
+            {% endif %} >
+        </div>
+        
+        
+        <div class="mb-3 ">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-select" aria-label="category" name="category">
+                <option value="open"
+                {% if values.category == 'open' %}
+                selected
+                {% endif %}
+                >Open</option>
+                <option value="open-ews" 
+                {% if values.category == 'open-ews' %}
+                selected
+                {% endif %}
+                >Open-EWS</option>
+                <option value="obc"
+                {% if values.category == 'obc' %}
+                selected
+                {% endif %}
+                >OBC</option>
+                <option value="sc"
+                {% if values.category == 'sc' %}
+                selected
+                {% endif %}
+                >SC</option>
+                <option value="st"
+                {% if values.category == 'st' %}
+                selected
+                {% endif %}
+                >ST</option>
+                <option value="other"
+                {% if values.category == 'other' %}
+                selected
+                {% endif %}
+                >Other</option>
+              </select>
+        </div>
+          
+        <div class="mb-3 ">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" class="form-control" id="email" name="email" 
+            {% if values.email %}
+            value="{{values.email}}"
+            {% endif %}>
+            
+        </div>
+        
+        <div class="mb-3 ">
+            <label for="mobile" class="form-label">Mobile</label>
+            <input type="text" class="form-control" id="mobile" name="mobile" 
+            {% if values.mobile %}
+            value="{{values.mobile}}"
+            {% endif %}>
+        </div>
+
+        <div class="mb-3">
+            <label for="address" class="form-label">Parmanent Address</label>
+            <textarea class="form-control" id="address"  name="address" rows="3"
+            >{% if values.addr %}{{values.addr}}{% endif %}</textarea>
+          </div>
+
+        <div class="mb-3 ">
+            <label for="pin" class="form-label">PIN</label>
+            <input type="number" class="form-control" id="pin" name="pin" 
+            {% if values.pin %}
+            value="{{values.pin}}"
+            {% endif %} >
+        </div>
+    </div>
+    
+    <h4>Academic Details:</h4>
+    <hr>
+    <div class="container col-md-6 m-auto">
+
+        <div class="mb-3 ">
+            <label for="xth" class="form-label">X<sup>th</sup> Percentage </label>
+            <input type="number" class="form-control" id="xth" name="xth" step=".01" min="0" max="100" 
+            {% if values.xth %}
+            value="{{values.xth}}"
+            {% endif %}>
+        </div>
+        
+        <div class="mb-3 ">
+            <label for="xiith" class="form-label">XII<sup>th</sup> Percentage </label>
+            <input type="number" class="form-control" id="xiith" name="xiith" step=".01" min="0" max="100"
+            {% if values.xiith %}
+            value="{{values.xiith}}"
+            {% endif %}
+            >
+        </div>
+
+        <label for="ugmarks" class="form-label">UG Marks</label>
+        <div class="input-group mb-3">
+            <select class="form-select" aria-label="ugscheme" name="ugscheme">
+                <option value="cgpa" 
+                {% if values.ugscheme == 'cgpa' %}
+                selected
+                {% endif %}
+                >CGPA</option>
+                <option value="percentage"
+                {% if values.ugscheme == 'percentage' %}
+                selected
+                {% endif %}
+                >Percentage</option>
+              </select>
+              <input type="number" class="form-control" id="ugmarks" name="ugmarks" step=".01" min="0" max="100"
+                {% if values.ugmarks %}
+                value="{{values.ugmarks}}"
+                {% endif %}
+              >
+        </div>
+        <button type="submit" class="btn btn-success">Save Details</button>
+        <button type="reset" class="btn btn-secondary mx-2">Clear Form</button>
+    </div>
+
+    </form>
+</div>
+
+{% endblock body%}

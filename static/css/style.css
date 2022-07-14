@@ -1,0 +1,45 @@
+*{
+    padding: 0;
+    margin: 0;
+  }
+  .logo {
+    height: 80px;
+    width: 80px;
+    margin: 0 10px 0 0;
+    background-image: url('/static/img/logo.png');
+    background-size: cover;
+  }
+
+  .nav1 {
+    margin: auto;
+    padding-left: 120px;
+    text-align: center;
+  }
+  
+  .left li{
+    font-size: 17.5px;
+  }
+  
+  .nav2 h2{
+    color: white;
+    padding: 0;
+    margin: 0;
+  }
+
+  .dashboard-div{
+    display: flex;
+    align-items: center;
+    color: white;
+  }
+  .dashboard-div h5{
+    margin: 0;
+  }
+
+  .info{
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+
+  .dashboard-action{
+    margin: 10px 0 0 0;
+  }

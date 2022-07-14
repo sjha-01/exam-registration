@@ -1,0 +1,81 @@
+{% extends 'base.html' %} 
+{% block title %} Dashboard {% endblock title %}
+
+{% block body %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark nav2">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><h3>Dashboard</h3></a>
+    <div class="dashboard-div">
+      <h5>Welcome, {{session.fullname}}</h5>
+      <a href="{{ url_for('logout') }}" class="btn btn-danger mx-3">Logout</a>
+    </div>
+    </div>
+  </div>
+</nav>
+
+
+{% if context.regType == 'submitted' %}
+<div class="container">
+<div class="alert alert-success my-3" role="alert">
+  <h4 align="center">Your registration is completed succesfully.</h4>
+</div>
+<h4 align="center">Your Registration No. is <i>{{context.registration_no}}</i></h4>
+<h4 align="center">Thank You!</h4>
+</div>
+
+{% else %}
+
+<div class="container">
+  <div class="container-fluid main">
+    <div class="row my-4">
+      <div class="col-md-5 left">
+        <u><h5>Directions for registration</h5></u>
+        <ul>
+          <li>You don't have to fill the entire form in one go</li>
+          <li>You can take as many rounds as you want</li>
+          <li>The progress of each round is saved and restored back in the next round (if any)</li>
+          <li>Once you fill all the fields you can finally submit the form after reviewing the same</li>
+        </ul>
+      </div>
+      <div class="col-md-7 right">
+        <u><h4 align="center">Action</h4></u>
+        
+      
+
+        {% if context.regType == 'new' %}
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <a href="{{ url_for('newRegistration') }}" class="btn btn-success my-5">Start Registration</a>
+        </div>   
+  
+      {% elif context.regType == 'pending' %}
+          <div class="d-grid gap-2 col-6 mx-auto">
+              <a href="{{ url_for('resumeRegistration') }}" class="btn btn-primary dashboard-action">Continue Registration</a>
+              <p class="info">You have incomplete registration, kindly complete it</p>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+              <a class="btn btn-outline-success dashboard-action disabled" >Final Submit</a>
+              <p class="info">You cannot submit now because you registration is incomplete</p>
+            </div>
+            
+            {% else %}
+            <div class="d-grid gap-2 col-6 mx-auto">
+              <a href="{{ url_for('resumeRegistration') }}" class="btn btn-secondary dashboard-action">Review or Edit response</a>
+              <p class="info">Please ensure that all the entered details are correct</p>
+          </div>
+          
+          <div class="d-grid gap-2 col-6 mx-auto">
+            <a href="{{ url_for('submitRegistration') }}" class="btn btn-outline-success dashboard-action">Final Submit</a>
+          </div>
+  {% endif %}
+  </div>
+</div>
+</div>
+</div>
+
+
+{% endif %}
+
+
+
+{% endblock body %}

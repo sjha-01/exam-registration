@@ -1,0 +1,135 @@
+{% extends 'base.html' %} {% block title %} Sign Up {% endblock title %} {%
+block body %}
+
+<div class="container">
+  <div class="container-fluid main">
+    <div class="row my-4">
+      <div class="col-md-5 left">
+        <u><h5>Guidelines on account creation</h5></u>
+        <ul>
+          <li>Set an username that you can easily remember</li>
+          <li>Set a strong Password</li>
+          <li>Enter full name as it is on your X'th marksheet</li>
+          <li>Keep the credentials safely with you</li>
+        </ul>
+      </div>
+      <div class="col-md-7 right">
+        <form action="" method="POST" class="col-md-7 m-auto">
+          <h4>Sign up Form</h4>
+
+          {% if mssg %}
+          <div class="mb-3">
+            <label for="fullname" class="form-label">Full Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="fullname"
+              name="fullname"
+              value="{{mssg.fullname}}"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              name="username"
+              value="{{mssg.username}}"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="password1" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password1"
+              name="password1"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="password2" class="form-label"
+              >Password Confirmation</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="password2"
+              name="password2"
+              required
+            />
+          </div>
+
+          <div class="alert alert-danger" role="alert">
+            {% for i in mssg.info %} {{ i }} <br />
+            {% endfor %}
+          </div>
+
+          {% else %}
+
+          <div class="mb-3">
+            <label for="fullname" class="form-label">Full Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="fullname"
+              name="fullname"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              name="username"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="password1" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password1"
+              name="password1"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="password2" class="form-label"
+              >Password Confirmation</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="password2"
+              name="password2"
+              required
+            />
+          </div>
+
+          {% endif %}
+          <button type="submit" class="btn btn-success">Sign Up</button>
+          <button type="reset" class="btn btn-secondary mx-2">Reset</button>
+
+          <br><br>
+        <h5>Already have an account? <a href="{{ url_for('login') }}" class="btn btn-primary btn-sm">Login</a></h5>
+        
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body%}

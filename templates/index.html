@@ -1,0 +1,15 @@
+{% extends 'base.html' %} 
+{% block title %} Index {% endblock title %}
+
+{% block body %}
+
+<div class="container my-4">
+    <h1>Welcome Student</h1><br>
+    <h4>New student? </h4>
+    <a href="{{ url_for('signup') }}" class="btn btn-outline-primary">Sign Up</a>
+    <br>
+    <h4>Existing student? </h4>
+    <a href="{{ url_for('login') }}" class="btn btn-outline-primary">Login</a>
+
+</div>
+{% endblock body%}

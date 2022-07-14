@@ -1,0 +1,71 @@
+{% extends 'base.html' %} 
+{% block title %} Login {% endblock title %}
+
+{% block body %}
+
+<div class="container">
+  
+  <div class="container-fluid main">
+  <div class="row my-4" >
+     <div class="col-md-5 left">
+        <u><h5>Steps for online registration</h5></u>
+        <ul>
+          <li>Make an account</li>
+          <li>Login with that account</li>
+          <li>Register the required details</li>
+          <li>Keep the generated registration number safely with you</li>
+        </ul>
+
+     </div>
+     <div class="col-md-7 right">
+       <form action="" method="POST" class=" col-md-7 m-auto">
+        <h4>Login with your account credentials</h4>
+
+        {% if mssg %}
+        
+        <div class="mb-3 ">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" id="username" name="username" value="{{mssg.username}}" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password"  required>
+        </div>
+        
+        
+        <div class="alert alert-danger" role="alert">
+          {% for i in mssg.info %}
+              {{ i }} <br>
+          {% endfor %}
+          
+        </div>
+        
+        {% else %}
+        
+        <div class="mb-3 ">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password"  required>
+          </div>
+        
+        {% endif %}
+        <button type="submit" class="btn btn-success">Login</button>
+        <button type="reset" class="btn btn-secondary mx-2">Reset</button>
+        <br><br>
+        <h5>Don't have an account? <a href="{{ url_for('signup') }}" class="btn btn-primary btn-sm">Sign Up</a></h5>
+        </form>
+
+     </div>
+  </div>
+</div>
+
+</div>
+
+
+{% endblock body%}
+
