@@ -5,10 +5,10 @@ import psycopg2.extras
 class Database:
     def __init__(self):
         self.con = connector.connect(
-            host='ec2-52-204-157-26.compute-1.amazonaws.com', port='5432', user='xhpgiuarbzkoup', password='0e3149f1ee98a2ecb45a948ada55c1af027bf6044d3e724c4634aecb4bf611f5', database='dberlnocf4u3fk')
+            host='localhost', port='5432', user='postgres', password='1234', database='postgres')
         self.con.autocommit = True
-        self.cur = self.con.cursor(cursor_factory= psycopg2.extras.DictCursor)
-        
+        self.cur = self.con.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
         # user is a reserved keyword in postgresql
         tables = ['''create table if not exists user1 (
                        username varchar(20),
@@ -132,7 +132,7 @@ class Database:
             username)
         self.cur.execute(query)
         id = self.cur.fetchone()['id']
-        registration_no = '202204' + '{0:04}'.format(id)
+        registration_no = '202304' + '{0:04}'.format(id)
         query = "update registered_students set registration_no='{}' where username='{}'".format(
             registration_no, username)
         self.cur.execute(query)
